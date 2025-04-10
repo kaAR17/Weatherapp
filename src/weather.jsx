@@ -9,20 +9,19 @@ function Weather(){
     console.log(setcity)
   }
   function handleClick() {
-    var weatherdata=axios(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=f6da0af7cd3438300c69a7571b3abc19`)
-    
-    weatherdata.then(function(s){
-      console.log("success")
-      console.log(s.data)
-      setWeather(s.data)
-    })
-    .catch(function(er)
-  {
-    console.log("error")
-    alert("City not found or network error.")
-  })
-    
+    axios(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=f6da0af7cd3438300c69a7571b3abc19&units=metric`)
+      .then(function (s) {
+        console.log(s.data);
+        setWeather(s.data);
+      })
+      .catch(function (er) {
+        console.log("error");
+        alert("City not found or network error.");
+      });
   }
+  
+    
+  
     return(
         <div
         className="h-screen  bg-center "
@@ -40,18 +39,18 @@ function Weather(){
           <button  className="text-xl px-4 py-2 rounded-lg bg-black text-white" onClick={handleClick}>Get Report</button>
         </div>
         {weather && weather.main && weather.wind && weather.weather && (
-  <div className='text-center flex justify-center gap-20 text-lg '>
-    <div className='text-center space-y-2 '>
-      <p>🌤️Weather: {weather.weather[0].main}</p>
-      <p>🌡️Temperature: {weather.main.temp} °C</p>
-      <p>❄️Wind chill: {weather.wind.speed} m/s</p>
+  <div className='text-center text-white flex justify-center gap-20 md:text-lg '>
+    <div className='text-center space-y-3 gap-2 '>
+      <p>🌤️  Weather: {weather.weather[0].main}</p>
+      <p>🌡️ Temperature: {weather.main.temp} °C</p>
+      <p>❄️ Wind chill: {weather.wind.speed} m/s</p>
       <p>🧭 Pressure: {weather.main.pressure} hPa</p>
     </div>
-    <div className='text-center space-y-2'>
-      <p>💧Humidity: {weather.main.humidity} %</p>
-      <p>🌧️Precipitation: N/A</p>
-      <p>🌫️Feels-like: {weather.main.feels_like}</p>
-      <p>📝Description: {weather.weather[0].description}</p>
+    <div className='text-center space-y-3 gap-2'>
+      <p>💧 Humidity: {weather.main.humidity} %</p>
+      <p>🌧️ Precipitation: N/A</p>
+      <p>🌫️ Feels-like: {weather.main.feels_like}</p>
+      <p>📝 Description: {weather.weather[0].description}</p>
     </div>
   </div>
 )}
